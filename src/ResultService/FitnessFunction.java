@@ -32,7 +32,7 @@ public class FitnessFunction {
         }
     }
 
-    private Coordinates currentCoords = new Coordinates(35,0);
+    private Coordinates currentCoords = new Coordinates(175,0);
     private ArrayList<Coordinates> coords = new ArrayList<>();
 
     private void saveCoords(){
@@ -68,7 +68,7 @@ public class FitnessFunction {
     }
 
     public void testParameters() {
-        double dt = 0.01;
+        double dt = 0.001;
         for (double i = 0.0; i < 2.0; i += dt) {
             makeStep(dt);
             saveCoords();
@@ -76,6 +76,7 @@ public class FitnessFunction {
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
                                 "phi = " + currentCoords.phi + "\n");
+            if (currentCoords.phi > 2*3.1416) break;
         }
     }
 
