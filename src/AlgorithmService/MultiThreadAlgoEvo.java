@@ -4,24 +4,30 @@ import java.util.ArrayList;
 
 public class MultiThreadAlgoEvo
 {
-    private int threadsNumber;
     private ArrayList<Runnable> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
 
-
-    public MultiThreadAlgoEvo(int threadsNumber)
+    public MultiThreadAlgoEvo()
     {
-        this.threadsNumber = threadsNumber;
     }
 
     public void startAlgo()
     {
+        AlgoEvo.setFunction(0);
         for (Runnable algoEvo: algoEvoList)
         {
             Thread algoEvoThread = new Thread(algoEvo);
             algoEvoThread.start();
         }
-        if(algoEvoList.size() == 5)
+        /*try
+        {
+            Thread.currentThread().join();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }*/
+        if(algoEvoList.size() == 5) // na razie zeby program sie konczyl
             isSuccess = true;
     }
 
@@ -29,7 +35,6 @@ public class MultiThreadAlgoEvo
     {
         Runnable algoEvo = new AlgoEvo();
         algoEvoList.add(algoEvo);
-        ++threadsNumber;
     }
 
     public boolean getIsSuccess()
