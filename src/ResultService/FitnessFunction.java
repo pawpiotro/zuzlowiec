@@ -15,8 +15,8 @@ public class FitnessFunction {
     //private double[] x = new double[2];
 
     class Coordinates   {
-        double r;
-        double phi;
+        private double r;
+        private double phi;
 
         Coordinates(double r1, double phi1){
             r = r1;
@@ -35,6 +35,11 @@ public class FitnessFunction {
     private Coordinates currentCoords = new Coordinates(35,0);
     private ArrayList<Coordinates> coords = new ArrayList<>();
 
+    private void saveCoords(){
+        Coordinates tmp = new Coordinates(currentCoords.r,currentCoords.phi);
+        coords.add(tmp);
+    }
+
     public FitnessFunction(double[] a0, double[][] B, double[] c){
         for(int i = 0; i < a0.length; i++)
             this.a0[i] = a0[i];
@@ -45,12 +50,12 @@ public class FitnessFunction {
             this.c[i] = c[i];
         this.v[0] = 0;
         this.v[1] = 0;
-        coords.add(currentCoords);
+        saveCoords();
     };
 
     private void makeStep(double dt){
         double a_r = a0[0] + B[0][0]*v[0] + B[0][1]*v[1] + c[0]*currentCoords.r;
-        System.out.println("a_r="+a_r);
+        System.out.println("a_r = "+a_r);
         double dv_r = a_r * dt;
         v[0] += dv_r;
         double dr = v[0] * dt;
@@ -58,7 +63,7 @@ public class FitnessFunction {
         double a_phi = a0[1] + B[1][0]*v[0] + B[1][1]*v[1] + c[1]*currentCoords.r;
         double dv_phi = a_phi * dt;
         v[1] += dv_phi;
-        double dphi = v[1] * dt;
+        double dphi = (v[1] * dt);// / currentCoords.r;
         currentCoords.phi += dphi;
     }
 
@@ -66,16 +71,22 @@ public class FitnessFunction {
         double dt = 0.01;
         for (double i = 0.0; i < 2.0; i += dt) {
             makeStep(dt);
-            coords.add(currentCoords);
-            System.out.println( "v[0]=" + v[0] + "\n" +
-                                "v[1]=" + v[1] + "\n" +
-                                "r=" + currentCoords.r + "\n" +
-                                "phi=" + currentCoords.phi + "\n");
+            saveCoords();
+            System.out.println( "v[0]= " + v[0] + "\n" +
+                                "v[1]= " + v[1] + "\n" +
+                                "r   = " + currentCoords.r + "\n" +
+                                "phi = " + currentCoords.phi + "\n");
         }
     }
 
     public ArrayList<Coordinates> getCoords(){
         return coords;
+    }
+
+    public void printarray(){
+        for(Coordinates c: coords){
+            System.out.println(c.getR()+" "+c.getPhi());
+        }
     }
 }
 

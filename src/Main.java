@@ -15,12 +15,12 @@ public class Main
             multiThreadAlgoEvo.startAlgo();
         }
         */
-        double[] a0 = {1.0, 2.0};
-        double[][] B = {{3.0, 4.0}, {5.0, 6.0}};
-        double[] c = {3.0, 5.0};
+        double[] a0 = {0.5, -1.0};
+        double[][] B = {{1.2, 0.6}, {0.7, 1.1}};
+        double[] c = {0.3, 0.2};
         FitnessFunction function = new FitnessFunction(a0, B, c);
         function.testParameters();
-
+        function.printarray();
         /*EventQueue.invokeLater(new Runnable() {
 
             @Override
