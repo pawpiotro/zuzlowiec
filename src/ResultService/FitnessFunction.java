@@ -63,7 +63,7 @@ public class FitnessFunction {
         double a_phi = a0[1] + B[1][0]*v[0] + B[1][1]*v[1] + c[1]*currentCoords.r;
         double dv_phi = a_phi * dt;
         v[1] += dv_phi;
-        double dphi = (v[1] * dt);// / currentCoords.r;
+        double dphi = (v[1] * dt) / currentCoords.r;
         currentCoords.phi += dphi;
     }
 

@@ -45,12 +45,12 @@ public class Draw extends JPanel {
         g2d.setColor(Color.red);
 
         for(FitnessFunction.Coordinates c: coords){
-            double x = c.getR() * Math.cos(c.getPhi())+w;
-            double y = c.getR() * Math.sin(c.getPhi())+h;
+            double x = c.getR() * Math.cos(c.getPhi()) + w;
+            double y = c.getR() * Math.sin(c.getPhi()) + h;
             //int x = (int)c.getR();
             //int y = (int)c.getPhi();
-            g2d.drawLine((int)x,(int)y,(int)x,(int)y);
-            //path.lineTo(x,y);
+            //g2d.drawLine((int)x,(int)y,(int)x,(int)y);
+            path.lineTo(x,y);
         }
         /*for (double t = 0; t < 2* Math.PI; t += dt) {
             r = r - 0.5;
@@ -60,7 +60,7 @@ public class Draw extends JPanel {
             path.lineTo(x, y);
         }*/
 
-        //g2d.draw(path);
+        g2d.draw(path);
     }
 
         public void init(){
