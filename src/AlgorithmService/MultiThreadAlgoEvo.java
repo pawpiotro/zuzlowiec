@@ -2,31 +2,42 @@ package AlgorithmService;
 
 import java.util.ArrayList;
 
-public class MultiThreadAlgoEvo
+public class MultiThreadAlgoEvo implements AlgorithmInterface
 {
-    private ArrayList<Runnable> algoEvoList = new ArrayList<>();
+    private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
 
     public MultiThreadAlgoEvo()
     {
     }
 
+    public void repeatAlgo()
+    {
+        while(!isSuccess)
+        {
+            prepareNewThread();
+            startAlgo();
+        }
+    }
+
     public void startAlgo()
     {
         AlgoEvo.setFunction(0);
-        for (Runnable algoEvo: algoEvoList)
+        for (Thread algoEvoThread: algoEvoList)
         {
-            Thread algoEvoThread = new Thread(algoEvo);
             algoEvoThread.start();
         }
-        /*try
+        try
         {
-            Thread.currentThread().join();
+            for (Thread algoEvoThread: algoEvoList)
+            {
+                algoEvoThread.join();
+            }
         }
         catch (InterruptedException e)
         {
             e.printStackTrace();
-        }*/
+        }
         if(algoEvoList.size() == 5) // na razie zeby program sie konczyl
             isSuccess = true;
     }
@@ -34,12 +45,13 @@ public class MultiThreadAlgoEvo
     public void prepareNewThread()
     {
         Runnable algoEvo = new AlgoEvo();
-        algoEvoList.add(algoEvo);
+        Thread algoEvoThread = new Thread(algoEvo);
+        algoEvoList.add(algoEvoThread);
     }
 
-    public boolean getIsSuccess()
+    /*boolean getIsSuccess()
     {
         return isSuccess;
-    }
+    }*/
 
 }

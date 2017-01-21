@@ -17,12 +17,12 @@ public class AlgoEvo implements Runnable
         return x * Math.sqrt(-2.0 * Math.log(x))*Math.cos(2*Math.PI*y);
     }
 
-    public synchronized void run()
+    public void run()
     {
         try
         {
-            ++function;
             System.out.println("Watek " + Thread.currentThread().getId() + " wypisuje " + function);
+            ++function;
             Thread.sleep(10);
         }
         catch(InterruptedException e)

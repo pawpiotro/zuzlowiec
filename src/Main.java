@@ -10,14 +10,9 @@ public class Main
     public static void main(String [] args) {
         int size = 600;
 
-        /*
         MultiThreadAlgoEvo multiThreadAlgoEvo = new MultiThreadAlgoEvo(); // Pytanie - jak robimy z liczba watkow
-        while(!multiThreadAlgoEvo.getIsSuccess())
-        {
-            multiThreadAlgoEvo.prepareNewThread();
-            multiThreadAlgoEvo.startAlgo();
-        }
-        */
+        multiThreadAlgoEvo.repeatAlgo();
+        /*
         double[] a0 = {0.5, -1.0};
         double[][] B = {{1.2, 0.6}, {0.7, 1.1}};
         double[] c = {0.3, 0.2};
@@ -25,12 +20,13 @@ public class Main
         FitnessFunction function = new FitnessFunction(x, size);
         System.out.println("Fitness function returned value: "+function.testParameters());
         //function.printarray();
+        */
 
         /*EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {*/
+            //@Override
+            //public void run() {
         Draw tmp = new Draw(function.getCoords(), size);
-        tmp.init();
+        tmp.init();*/
     }
 
 }
