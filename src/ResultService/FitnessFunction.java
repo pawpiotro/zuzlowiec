@@ -91,7 +91,7 @@ public class FitnessFunction {
                 distance = 1.0;
         System.out.println("Distance: "+distance);
         System.out.println("Time: "+ time);
-        return time/(distance*distance)*(distance == 1.0 ? 0.7 : 1.0);
+        return ((distance*distance)/time) * (distance == 1.0 ? 1.0 : 0.7);
     }
 
     public ArrayList<Coordinates> getCoords(){

@@ -1,5 +1,7 @@
 package AlgorithmService;
 
+import ResultService.AlgoEvoZuzlowiec;
+
 import java.util.ArrayList;
 
 public class MultiThreadAlgoEvo  implements AlgorithmInterface
@@ -23,7 +25,7 @@ public class MultiThreadAlgoEvo  implements AlgorithmInterface
         AlgoEvo.setFunction(0);
         for (int i = 0; i < threadsNumber; ++i)
         {
-            Thread algoEvoThread = new Thread(new AlgoEvo());
+            Thread algoEvoThread = new Thread(new AlgoEvoZuzlowiec());
             algoEvoList.add(algoEvoThread);
             algoEvoThread.start();
         }
