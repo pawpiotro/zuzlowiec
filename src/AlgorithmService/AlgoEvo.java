@@ -5,7 +5,8 @@ import java.lang.*;
 public class AlgoEvo implements Runnable
 {
     // volatile - zeby nie odkladac operacji na niej w pamieci w innej kolejnosci niz wskazana w kodzie zrodlowym
-    volatile static int function; // zmienna wspoldzielona
+    static int function; // zmienna wspoldzielona
+    private Object lock = new Object();
 
     public AlgoEvo()
     {
@@ -21,8 +22,11 @@ public class AlgoEvo implements Runnable
     {
         try
         {
-            System.out.println("Watek " + Thread.currentThread().getId() + " wypisuje " + function);
-            ++function;
+            synchronized (lock)
+            {
+                System.out.println("Watek " + Thread.currentThread().getId() + " wypisuje " + function);
+                ++function;
+            }
             Thread.sleep(10);
         }
         catch(InterruptedException e)

@@ -2,11 +2,11 @@ package AlgorithmService;
 
 import java.util.ArrayList;
 
-public class MultiThreadAlgoEvo implements AlgorithmInterface
+public class MultiThreadAlgoEvo  implements AlgorithmInterface
 {
     private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
-    private static int threadsNumber = 0;
+    private static int threadsNumber = 5;
 
     public MultiThreadAlgoEvo()
     {
@@ -21,7 +21,6 @@ public class MultiThreadAlgoEvo implements AlgorithmInterface
     public void startAlgo()
     {
         AlgoEvo.setFunction(0);
-        ++threadsNumber;
         for (int i = 0; i < threadsNumber; ++i)
         {
             Thread algoEvoThread = new Thread(new AlgoEvo());

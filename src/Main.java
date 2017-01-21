@@ -12,15 +12,14 @@ public class Main
 
         MultiThreadAlgoEvo multiThreadAlgoEvo = new MultiThreadAlgoEvo(); // Pytanie - jak robimy z liczba watkow
         multiThreadAlgoEvo.repeatAlgo();
-        /*
+
         double[] a0 = {0.5, -1.0};
         double[][] B = {{1.2, 0.6}, {0.7, 1.1}};
         double[] c = {0.3, 0.2};
         Individual x = new Individual(a0, B, c);
         FitnessFunction function = new FitnessFunction(x, size);
         System.out.println("Fitness function returned value: "+function.testParameters());
-        //function.printarray();
-        */
+        function.printarray();
 
         /*EventQueue.invokeLater(new Runnable() {
             //@Override
