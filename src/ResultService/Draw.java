@@ -44,10 +44,10 @@ public class Draw extends JPanel {
         for(FitnessFunction.Coordinates c: coords){
             double x = c.getR() * Math.cos(c.getPhi()) + w;
             double y = c.getR() * Math.sin(c.getPhi()) + h;
-            System.out.println( "x= " + x +
+            /*System.out.println( "x= " + x +
                     " y= " + y +
                     " r   = " + c.getR() +
-                    " phi = " + c.getPhi()+ "\n");
+                    " phi = " + c.getPhi()+ "\n");*/
             path.lineTo(x,y);
         }
         g2d.draw(path);

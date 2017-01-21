@@ -58,7 +58,7 @@ public class FitnessFunction {
         double B[][] = x.getB();
         double c[] = x.getC();
         double a_r = a0[0] + B[0][0]*v[0] + B[0][1]*v[1] + c[0]*currentCoords.r;
-        System.out.println("a_r = "+a_r);
+        //System.out.println("a_r = "+a_r);
         double dv_r = a_r * dt;
         v[0] += dv_r;
         double dr = v[0] * dt;
@@ -70,22 +70,24 @@ public class FitnessFunction {
         currentCoords.phi += dphi;
     }
 
-    public void testParameters() {
+    public double testParameters() {
         double dt = 0.001;
         double time = 0.0;
         for (;;) {
             makeStep(dt);
             saveCoords();
-            System.out.println( "v[0]= " + v[0] + "\n" +
+            /*System.out.println( "v[0]= " + v[0] + "\n" +
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
-                                "phi = " + currentCoords.phi + "\n");
-            if (currentCoords.phi > 2*3.1416) break; // MATH PI
+                                "phi = " + currentCoords.phi + "\n");*/
+            if (currentCoords.phi > 2*Math.PI) break;
 
             if(currentCoords.r > upperLimit || currentCoords.r < lowerLimit) break;
 
             time += dt;
         }
+        double distance = currentCoords.phi/(2*Math.PI);
+        return time/(distance*distance)*(distance == 1.0 ? 0.7 : 1.0);
     }
 
     public ArrayList<Coordinates> getCoords(){
