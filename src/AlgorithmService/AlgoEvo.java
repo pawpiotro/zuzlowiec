@@ -48,7 +48,7 @@ public abstract class AlgoEvo implements Runnable
         double phi = 0.0;
         double c1 = 0.82, c2 = 1.2;
         int m = 0;
-        while (sigma > 0.1) {
+        while (sigma > 0.8) {
             // wygeneruj potomka y
             for (int i = 0; i < size; i++) {
                 yparams[i] = params[i] + sigma * BoxMullerTransform();
@@ -62,8 +62,8 @@ public abstract class AlgoEvo implements Runnable
             // co 10 krok zmien sigma
             if (m++ == 10) {
                 m = 0;
-                if (phi < 0.2)
-                    sigma = c1 * sigma;
+                if (phi < 0.2){
+                    sigma = c1 * sigma;}
                 else if (phi > 0.2)
                     sigma = c2 * sigma;
             }
