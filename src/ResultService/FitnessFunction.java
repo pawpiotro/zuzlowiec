@@ -39,7 +39,7 @@ public class FitnessFunction {
         double initialR = 35.0*scale;
         upperLimit = 40.0*scale;
         lowerLimit = 30.0*scale;
-        System.out.println(initialR);
+        System.out.println("initalR = "+initialR);
         currentCoords = new Coordinates(initialR,0);
         x = x1;
         this.v[0] = 0;
@@ -87,6 +87,8 @@ public class FitnessFunction {
             time += dt;
         }
         double distance = currentCoords.phi/(2*Math.PI);
+        System.out.println("Distance: "+distance);
+        System.out.println("Time: "+ time);
         return time/(distance*distance)*(distance == 1.0 ? 0.7 : 1.0);
     }
 

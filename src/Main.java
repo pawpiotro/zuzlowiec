@@ -23,9 +23,9 @@ public class Main
         double[] c = {0.3, 0.2};
         Individual x = new Individual(a0, B, c);
         FitnessFunction function = new FitnessFunction(x, size);
-        System.out.println(function.testParameters());
+        System.out.println("Fitness function returned value: "+function.testParameters());
         //function.printarray();
-        
+
         /*EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {*/
