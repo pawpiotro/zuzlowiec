@@ -6,7 +6,7 @@ public abstract class AlgoEvo implements Runnable
 {
     // volatile - zeby nie odkladac operacji na niej w pamieci w innej kolejnosci niz wskazana w kodzie zrodlowym
     static int function; // zmienna wspoldzielona
-    private Object lock = new Object();
+    protected Object lock = new Object();
     protected int size;   // ilosc parametrow
     protected double params[] = new double[size]; // parametry znajdowane przez algorytm
 
@@ -20,7 +20,7 @@ public abstract class AlgoEvo implements Runnable
         }
     }
 
-    private double BoxMullerTransform(){
+    protected double BoxMullerTransform(){
         double x = Math.random();
         double y = Math.random();
         return x * Math.sqrt(-2.0 * Math.log(x))*Math.cos(2*Math.PI*y);
