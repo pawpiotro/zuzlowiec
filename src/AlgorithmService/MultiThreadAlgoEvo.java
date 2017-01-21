@@ -8,7 +8,7 @@ public class MultiThreadAlgoEvo  implements AlgorithmInterface
 {
     private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
-    private static int threadsNumber = 5;
+    private static int threadsNumber = 1;
 
     public MultiThreadAlgoEvo()
     {
@@ -38,7 +38,7 @@ public class MultiThreadAlgoEvo  implements AlgorithmInterface
         {
             e.printStackTrace();
         }
-        if(algoEvoList.size() == 5) // na razie zeby program sie konczyl
+        if(algoEvoList.size() == 1) // na razie zeby program sie konczyl
             isSuccess = true;
         algoEvoList.clear();
     }

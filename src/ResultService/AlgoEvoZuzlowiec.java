@@ -14,9 +14,9 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         super(8);
     }
 
-    public double fitness(double fparams[], int fsize)
+    protected double fitness(double fparams[], int fsize)
     {
-        double[] a0 = {this.params[0], super.params[1]};
+        double[] a0 = {params[0], params[1]};
         double[][] B = {{params[2], params[3]}, {params[4], params[5]}};
         double[] c = {params[6], params[7]};
         Individual x = new Individual(a0, B, c);

@@ -5,16 +5,17 @@ import java.lang.*;
 public abstract class AlgoEvo implements Runnable
 {
     // volatile - zeby nie odkladac operacji na niej w pamieci w innej kolejnosci niz wskazana w kodzie zrodlowym
-    static int function; // zmienna wspoldzielona
+    static double fxr = 0.0; // zmienna wspoldzielona
     protected Object lock = new Object();
     protected int size;   // ilosc parametrow
-    protected double params[] = new double[size]; // parametry znajdowane przez algorytm
+    protected double params[]; // parametry znajdowane przez algorytm
 
-    abstract double fitness(double fparams[], int fsize);
+    abstract protected double fitness(double fparams[], int fsize);
 
     public AlgoEvo(int csize)
     {
         size = csize;
+        params = new double[size];
         for (int i = 0; i < csize; i++){
             params[i] = Math.random();
         }
@@ -66,16 +67,22 @@ public abstract class AlgoEvo implements Runnable
                 else if (phi > 0.2)
                     sigma = c2 * sigma;
             }
+            // porownaj wartosc miedzy watkami
+            if (fitness(params, size) > fxr) {
+                fxr = fitness(params, size);
+                System.out.println("fxr: " + fxr + "\n");
+            }
+            System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
         }
     }
 
-    public static int getFunction() {
-        return function;
+    public static double getFunction() {
+        return fxr;
     }
 
-    public static void setFunction(int function)
+    public static void setFunction(double function)
     {
-        AlgoEvo.function = function;
+        AlgoEvo.fxr = function;
     }
 
 }
