@@ -6,6 +6,7 @@ public class MultiThreadAlgoEvo implements AlgorithmInterface
 {
     private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
+    private static int threadsNumber = 0;
 
     public MultiThreadAlgoEvo()
     {
@@ -14,25 +15,23 @@ public class MultiThreadAlgoEvo implements AlgorithmInterface
     public void repeatAlgo()
     {
         while(!isSuccess)
-        {
-            prepareNewThread();
             startAlgo();
-        }
     }
 
     public void startAlgo()
     {
         AlgoEvo.setFunction(0);
-        for (Thread algoEvoThread: algoEvoList)
+        ++threadsNumber;
+        for (int i = 0; i < threadsNumber; ++i)
         {
+            Thread algoEvoThread = new Thread(new AlgoEvo());
+            algoEvoList.add(algoEvoThread);
             algoEvoThread.start();
         }
         try
         {
             for (Thread algoEvoThread: algoEvoList)
-            {
                 algoEvoThread.join();
-            }
         }
         catch (InterruptedException e)
         {
@@ -40,13 +39,7 @@ public class MultiThreadAlgoEvo implements AlgorithmInterface
         }
         if(algoEvoList.size() == 5) // na razie zeby program sie konczyl
             isSuccess = true;
-    }
-
-    public void prepareNewThread()
-    {
-        Runnable algoEvo = new AlgoEvo();
-        Thread algoEvoThread = new Thread(algoEvo);
-        algoEvoList.add(algoEvoThread);
+        algoEvoList.clear();
     }
 
     /*boolean getIsSuccess()
