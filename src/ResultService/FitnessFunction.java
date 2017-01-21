@@ -1,18 +1,20 @@
 package ResultService;
 
 import java.util.ArrayList;
-
+import IndividualService.Individual;
 /**
  * Created by blank on 1/10/2017.
  */
 
 
 public class FitnessFunction {
-    private double[] a0 = new double[2];
-    private double[][] B = new double[2][2];
-    private double[] c = new double[2];
+
+    private Individual x;
+    double upperLimit;
+    double lowerLimit;
     private double[] v = new double[2];
-    //private double[] x = new double[2];
+    private Coordinates currentCoords;
+    private ArrayList<Coordinates> coords = new ArrayList<>();
 
     class Coordinates   {
         private double r;
@@ -32,28 +34,29 @@ public class FitnessFunction {
         }
     }
 
-    private Coordinates currentCoords = new Coordinates(175,0);
-    private ArrayList<Coordinates> coords = new ArrayList<>();
+    public FitnessFunction(Individual x1, int size){
+        double scale = size/(2.0*40.0);
+        double initialR = 35.0*scale;
+        upperLimit = 40.0*scale;
+        lowerLimit = 30.0*scale;
+        System.out.println(initialR);
+        currentCoords = new Coordinates(initialR,0);
+        x = x1;
+        this.v[0] = 0;
+        this.v[1] = 0;
+    }
+
 
     private void saveCoords(){
         Coordinates tmp = new Coordinates(currentCoords.r,currentCoords.phi);
         coords.add(tmp);
     }
 
-    public FitnessFunction(double[] a0, double[][] B, double[] c){
-        for(int i = 0; i < a0.length; i++)
-            this.a0[i] = a0[i];
-        for(int i = 0; i < B.length; i++)
-            for(int j = 0; j < B[i].length; j++)
-                this.B[i][j] = B[i][j];
-        for(int i = 0; i < c.length; i++)
-            this.c[i] = c[i];
-        this.v[0] = 0;
-        this.v[1] = 0;
-        saveCoords();
-    };
 
     private void makeStep(double dt){
+        double a0[] = x.getA0();
+        double B[][] = x.getB();
+        double c[] = x.getC();
         double a_r = a0[0] + B[0][0]*v[0] + B[0][1]*v[1] + c[0]*currentCoords.r;
         System.out.println("a_r = "+a_r);
         double dv_r = a_r * dt;
@@ -63,20 +66,25 @@ public class FitnessFunction {
         double a_phi = a0[1] + B[1][0]*v[0] + B[1][1]*v[1] + c[1]*currentCoords.r;
         double dv_phi = a_phi * dt;
         v[1] += dv_phi;
-        double dphi = (v[1] * dt) / currentCoords.r;
+        double dphi = (v[1] * dt);// / currentCoords.r;
         currentCoords.phi += dphi;
     }
 
     public void testParameters() {
         double dt = 0.001;
-        for (double i = 0.0; i < 2.0; i += dt) {
+        double time = 0.0;
+        for (;;) {
             makeStep(dt);
             saveCoords();
             System.out.println( "v[0]= " + v[0] + "\n" +
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
                                 "phi = " + currentCoords.phi + "\n");
-            if (currentCoords.phi > 2*3.1416) break;
+            if (currentCoords.phi > 2*3.1416) break; // MATH PI
+
+            if(currentCoords.r > upperLimit || currentCoords.r < lowerLimit) break;
+
+            time += dt;
         }
     }
 
