@@ -87,6 +87,8 @@ public class FitnessFunction {
             time += dt;
         }
         double distance = currentCoords.phi/(2*Math.PI);
+        if(distance > 1.0)
+                distance = 1.0;
         System.out.println("Distance: "+distance);
         System.out.println("Time: "+ time);
         return time/(distance*distance)*(distance == 1.0 ? 0.7 : 1.0);

@@ -11,6 +11,12 @@ public class AlgoEvo implements Runnable
     {
     }
 
+    private double BoxMullerTransform(){
+        double x = Math.random();
+        double y = Math.random();
+        return x * Math.sqrt(-2.0 * Math.log(x))*Math.cos(2*Math.PI*y);
+    }
+
     public synchronized void run()
     {
         try
