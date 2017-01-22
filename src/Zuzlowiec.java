@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.io.PrintStream;
 
-/**
- * Created by Pawel on 22-Jan-17.
- */
 public class Zuzlowiec extends JFrame{
     private JPanel rootPanel;
     private JTextArea text;
