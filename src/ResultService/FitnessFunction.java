@@ -61,9 +61,9 @@ public class FitnessFunction {
 
     public FitnessFunction(Individual x1, int size){
         scale = size/(2.0*rMax);
-        double initialR = 35.0*scale;
-        upperLimit = rMax*scale;
-        lowerLimit = rMin*scale;
+        double initialR = 35.0;
+        upperLimit = rMax;
+        lowerLimit = rMin;
         //System.out.println("initalR = "+initialR);
         currentCoords = new Coordinates(initialR,0);
         x = x1;

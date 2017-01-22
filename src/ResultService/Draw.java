@@ -38,7 +38,8 @@ public class Draw extends JPanel {
         int h = getHeight() / 2;
         int r1 = (int)((3.0/4.0)*SIZE);
         int r2 = SIZE;
-        double r = 35.0*(SIZE/(2.0*40.0));
+        double scale = SIZE/(2.0*40.0);
+        double r = 35.0 * scale;
         g2d.draw(new Ellipse2D.Double(w-r1/2,h-r1/2, r1,r1));
         g2d.draw(new Ellipse2D.Double(w-r2/2,h-r2/2, r2,r2));
 
@@ -47,8 +48,8 @@ public class Draw extends JPanel {
             path.moveTo(w + r, h);
             g2d.setColor(Color.red);
             for (FitnessFunction.Coordinates c : coords) {
-                double x = c.getR() * Math.cos(c.getPhi()) + w;
-                double y = c.getR() * Math.sin(c.getPhi()) + h;
+                double x = scale * c.getR() * Math.cos(c.getPhi()) + w;
+                double y = scale * c.getR() * Math.sin(c.getPhi()) + h;
                 path.lineTo(x, y);
             }
             g2d.draw(path);
@@ -61,8 +62,8 @@ public class Draw extends JPanel {
                 g2d.setColor(randomColor);
                 for (FitnessFunction.Coordinates c : arrayElement) {
 
-                    double x = c.getR() * Math.cos(c.getPhi()) + w;
-                    double y = c.getR() * Math.sin(c.getPhi()) + h;
+                    double x = scale * c.getR() * Math.cos(c.getPhi()) + w;
+                    double y = scale * c.getR() * Math.sin(c.getPhi()) + h;
                 /*System.out.println( "x= " + x +
                         " y= " + y +
                         " r   = " + c.getR() +
