@@ -10,7 +10,7 @@ import IndividualService.Individual;
 public class Main
 {
     public static void main(String [] args) {
-        int size = 600;
+        int size = 800;
 
         MultiThreadAlgoEvo multiThreadAlgoEvo = new MultiThreadAlgoEvo(); // Pytanie - jak robimy z liczba watkow
         multiThreadAlgoEvo.repeatAlgo();
@@ -34,7 +34,7 @@ public class Main
             //public void run() {
         //===================================================================
 
-        Draw tmp = new Draw();//function.getCoords(), size);
+        Draw tmp = new Draw(size);//function.getCoords(), size);
         tmp.init();
         System.out.println("===============================================================");
         double wynik[] = AlgoEvo.getBestParams();
@@ -51,7 +51,7 @@ public class Main
         FitnessFunction function = new FitnessFunction(x);
         function.testParameters();
         function.printarray();
-        Draw best = new Draw(function.getCoords());
+        Draw best = new Draw(function.getCoords(), size);
         best.init();
     }
 

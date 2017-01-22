@@ -8,18 +8,20 @@ import java.util.Random;
 
 public class Draw extends JPanel {
 
-    private final int SIZE=600;
+    private final int SIZE;
     private GeneralPath path = new GeneralPath();
 
     private ArrayList<FitnessFunction.Coordinates> coords;
     private boolean drawBest;
 
-    public Draw(){
+    public Draw(int size){
         drawBest = false;
+        SIZE = size;
     }
-    public Draw(ArrayList<FitnessFunction.Coordinates> coordinates){
+    public Draw(ArrayList<FitnessFunction.Coordinates> coordinates, int size){
         drawBest = true;
         coords = coordinates;
+        SIZE = size;
     }
 
     @Override
