@@ -79,9 +79,9 @@ public abstract class AlgoEvo implements Runnable
                 fxr = fitness(params, size);
                 for (int i = 0; i < size; i++)
                     best_params[i] = params[i];
-                System.out.println("fxr: " + fxr + "\n");
+                //System.out.println("fxr: " + fxr + "\n");
             }
-            System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
+            //System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
         }
     }
 

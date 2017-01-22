@@ -203,7 +203,7 @@ public class FitnessFunction {
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
                                 "phi = " + currentCoords.phi + "\n");*/
-            if (currentCoords.phi > 2*Math.PI || currentCoords.phi < 0) break;
+            if (currentCoords.phi > 2*Math.PI || currentCoords.phi < (-2*Math.PI)) break;
 
 
 
