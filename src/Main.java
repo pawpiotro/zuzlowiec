@@ -48,7 +48,7 @@ public class Main
         double[][] B = {{12.1, 3.1}, {4.1, 9.1}};
         double[] c = {15.1, 2.1};*/
         Individual x = new Individual(a0, B, c);
-        FitnessFunction function = new FitnessFunction(x, size);
+        FitnessFunction function = new FitnessFunction(x);
         function.testParameters();
         function.printarray();
         Draw best = new Draw(function.getCoords());

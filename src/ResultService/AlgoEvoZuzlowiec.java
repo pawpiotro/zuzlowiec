@@ -32,7 +32,7 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         double[][] B = {{fparams[2], fparams[3]}, {fparams[4], fparams[5]}};
         double[] c = {fparams[6], fparams[7]};
         Individual x = new Individual(a0, B, c);
-        current = new FitnessFunction(x, 600);
+        current = new FitnessFunction(x);
         allCoords.add(current.getCoords());
         return current.testParameters();
     }

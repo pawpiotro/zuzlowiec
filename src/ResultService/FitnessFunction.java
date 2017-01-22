@@ -18,9 +18,6 @@ public class FitnessFunction {
     private static final double rMin = 30.0;
     private static final double rMax = 40.0;
 
-
-    private double scale;
-
     class Coordinates
     {
         private double r;
@@ -59,8 +56,7 @@ public class FitnessFunction {
         }
     }
 
-    public FitnessFunction(Individual x1, int size){
-        scale = size/(2.0*rMax);
+    public FitnessFunction(Individual x1){
         double initialR = 35.0;
         upperLimit = rMax;
         lowerLimit = rMin;
@@ -83,10 +79,8 @@ public class FitnessFunction {
         double B[][] = x.getB();
         double c[] = x.getC();
         double a_r = a0[0] + B[0][0]*v[0] + B[0][1]*v[1] + c[0]*currentCoords.r;
-        a_r = a_r * scale;
         //System.out.println("a_r = "+a_r);
         double dv_r = a_r * dt;
-        //dv_r = dv_r *scale;
         v[0] += dv_r;
         double dr = v[0] * dt;
         currentCoords.r += dr;
