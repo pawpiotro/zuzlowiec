@@ -25,4 +25,11 @@ public class Individual {
         return c;
     }
 
+    public synchronized void printInfo(){
+        System.out.println( "a0: " + a0[0] + "   " + a0[1] + "\n" +
+                            "B:  " + B[0][0] + "   " + B[0][1] + "\n" +
+                            "    " + B[1][0] + "   " + B[1][1] + "\n" +
+                            "c:  " + c[0] + "   " + c[1]);
+    }
+
 }

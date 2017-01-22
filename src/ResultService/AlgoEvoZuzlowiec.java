@@ -30,6 +30,8 @@ public class AlgoEvoZuzlowiec extends AlgoEvo {
     }
 
     protected synchronized void setfxr(double function) {
+        System.out.println("fxr: " + function);
+        current.printInfo();
         super.setfxr(function);
     }
 }

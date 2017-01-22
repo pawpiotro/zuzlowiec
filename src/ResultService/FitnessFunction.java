@@ -15,6 +15,9 @@ public class FitnessFunction {
     private static final double rMin = 30.0;
     private static final double rMax = 40.0;
 
+    double time;
+    double distance;
+
     class Coordinates {
         private double r;
         private double phi;
@@ -70,7 +73,7 @@ public class FitnessFunction {
 
     public double testParameters() {
         double dt = 0.001;
-        double time = 0.0;
+        time = 0.0;
         for (; ; ) {
             makeStep(dt);
             if (currentCoords.r > upperLimit) {
@@ -100,13 +103,11 @@ public class FitnessFunction {
             saveCoords();
             time += dt;
         }
-        double distance = currentCoords.phi / (2 * Math.PI);
+        distance = currentCoords.phi / (2 * Math.PI);
         if (distance > 1.0)
             distance = 1.0;
         if (distance < 0.0)
             distance = 0.0;
-        //System.out.println("Distance: "+distance);
-        //System.out.println("Time: "+ time);
         return ((distance * distance) / time) * (distance == 1.0 ? 1.0 : 0.7);
     }
 
@@ -118,6 +119,12 @@ public class FitnessFunction {
         for (Coordinates c : coords) {
             System.out.println(c.r + " " + c.phi);
         }
+    }
+
+    public synchronized void printInfo(){
+        x.printInfo();
+        System.out.println( "Time:    " + time + "\n" +
+                            "Distance:" + distance + "\n");
     }
 }
 

@@ -51,9 +51,7 @@ public abstract class AlgoEvo implements Runnable {
                     if (tmp > fxr) {
                         setfxr(tmp);
                         System.arraycopy(params, 0, best_params, 0, size);
-                        System.out.println("fxr: " + fxr + "\n");
                     }
-                    System.out.println(Thread.currentThread().getId() + " " + tmp + "\n");
                 }
             }
             // co 10 krok zmien sigma
