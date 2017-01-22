@@ -25,7 +25,7 @@ public class Main
         Individual x = new Individual(a0, B, c);
         FitnessFunction function = new FitnessFunction(x, size);
         System.out.println("Fitness function returned value: "+function.testParameters());
-        function.printarray();
+        //function.printarray();
 
         //EventQueue.invokeLater(new Runnable() {
             //@Override

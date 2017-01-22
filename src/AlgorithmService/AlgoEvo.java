@@ -76,12 +76,12 @@ public abstract class AlgoEvo implements Runnable
             }
             // porownaj wartosc miedzy watkami
             if (fitness(params, size) > fxr) {
-                fxr = fitness(params, size);
+                setfxr(fitness(params, size));
                 for (int i = 0; i < size; i++)
                     best_params[i] = params[i];
-                //System.out.println("fxr: " + fxr + "\n");
+                System.out.println("fxr: " + fxr + "\n");
             }
-            //System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
+            System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
         }
     }
 
@@ -91,10 +91,10 @@ public abstract class AlgoEvo implements Runnable
 
     public static double[] getBestParams() { return best_params; }
 
-    /*public static void setFunction(double function)
+    protected void setfxr(double function)
     {
-        AlgoEvo.fxr = function;
-    }*/
+        fxr = function;
+    }
 
 }
 

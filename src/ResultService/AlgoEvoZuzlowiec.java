@@ -28,4 +28,10 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         FitnessFunction function = new FitnessFunction(x, 600);
         return function.testParameters();
     }
+
+    protected void setfxr(double function)
+    {
+        // <----- TUTAJ RYSOWANIE CZY COS
+        super.setfxr(function);
+    }
 }

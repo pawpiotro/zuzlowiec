@@ -8,7 +8,7 @@ public class MultiThreadAlgoEvo  implements AlgorithmInterface
 {
     private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
-    private static int threadsNumber = 1;
+    private static int threadsNumber = 5;
 
     public MultiThreadAlgoEvo()
     {
