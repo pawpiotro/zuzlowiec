@@ -37,16 +37,17 @@ public class Draw extends JPanel {
         double r = 35.0*(SIZE/(2.0*40.0));
         g2d.draw(new Ellipse2D.Double(w-r1/2,h-r1/2, r1,r1));
         g2d.draw(new Ellipse2D.Double(w-r2/2,h-r2/2, r2,r2));
-        path.reset();
-        path.moveTo(w+r, h);
+
 
         for(ArrayList<FitnessFunction.Coordinates> arrayElement: AlgoEvoZuzlowiec.allCoords) {
+            path.reset();
+            path.moveTo(w+r, h);
             Random random = new Random();
             Color randomColor = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
             g2d.setColor(randomColor);
             //Color randomColor = new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
 
-            System.out.println("zmiana");
+            System.out.println(random.nextFloat());
             for (FitnessFunction.Coordinates c : arrayElement) {
 
                 double x = c.getR() * Math.cos(c.getPhi()) + w;
