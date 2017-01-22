@@ -51,7 +51,11 @@ public abstract class AlgoEvo implements Runnable
         int m = 0;
         while (sigma > 0.5) {
             // wygeneruj potomka y
-            for (int i = 0; i < size; i++) {
+            //double max = Double.MIN_VALUE;
+            //double min = Double.MAX_VALUE;
+            //double temp[] = new double[size];
+            for (int i = 0; i < size; i++)
+            {
                 double temp = params[i] + sigma * BoxMullerTransform();
                 if (temp > 1.0)
                     temp = 1.0;
@@ -59,11 +63,40 @@ public abstract class AlgoEvo implements Runnable
                     temp = -1.0;
                 yparams[i] = temp;
             }
+            /*for (int i = 0; i < size; i++) {
+                temp[i] = params[i] + sigma * BoxMullerTransform();
+                if(temp[i] > max)
+                    max = temp[i];
+                else if (temp[i] < min)
+                    min = temp[i];
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                if(temp[i] < 0)
+                    yparams[i] = ;
+            }*/
+
             // przypisz nowe parametry
-            if (fitness(yparams, size) > fitness(params, size)) {
+            if (fitness(yparams, size) > fitness(params, size))
+            {
                 for (int i = 0; i < size; i++)
                     params[i] = yparams[i];
                 phi += 0.1;
+
+                // porownaj wartosc miedzy watkami
+                synchronized(lock)
+                {
+                    double tmp = fitness(params, size);
+                    if (tmp > fxr)
+                    {
+                        setfxr(tmp);
+                        for (int i = 0; i < size; i++)
+                            best_params[i] = params[i];
+                        System.out.println("fxr: " + fxr + "\n");
+                    }
+                    System.out.println(Thread.currentThread().getId() + " " + tmp + "\n");
+                }
             }
             // co 10 krok zmien sigma
             if (m++ == 10) {
@@ -74,27 +107,15 @@ public abstract class AlgoEvo implements Runnable
                 m = 0;
                 phi = 0.0;
             }
-            // porownaj wartosc miedzy watkami
-            synchronized(lock)
-            {
-                double tmp = fitness(params, size);
-                if (tmp > fxr)
-                {
-                    setfxr(tmp);
-                    for (int i = 0; i < size; i++)
-                        best_params[i] = params[i];
-                    System.out.println("fxr: " + fxr + "\n");
-                }
-                System.out.println(Thread.currentThread().getId() + " " + tmp + "\n");
-            }
-            /*try
+
+            try
             {
                 Thread.sleep(10);
             }
             catch(InterruptedException ex)
             {
 
-            }*/
+            }
         }
     }
 
