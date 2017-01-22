@@ -12,11 +12,15 @@ public class Draw extends JPanel {
     private GeneralPath path = new GeneralPath();
 
     private ArrayList<FitnessFunction.Coordinates> coords;
+    private boolean drawBest;
 
-    /*public Draw(ArrayList<FitnessFunction.Coordinates> coordinates, int size){
+    public Draw(){
+        drawBest = false;
+    }
+    public Draw(ArrayList<FitnessFunction.Coordinates> coordinates){
+        drawBest = true;
         coords = coordinates;
-        SIZE = size;
-    }*/
+    }
 
     @Override
     public Dimension getPreferredSize() {
@@ -38,24 +42,35 @@ public class Draw extends JPanel {
         g2d.draw(new Ellipse2D.Double(w-r1/2,h-r1/2, r1,r1));
         g2d.draw(new Ellipse2D.Double(w-r2/2,h-r2/2, r2,r2));
 
-
-        for(ArrayList<FitnessFunction.Coordinates> arrayElement: AlgoEvoZuzlowiec.allCoords) {
+        if(drawBest){
             path.reset();
-            path.moveTo(w+r, h);
-            Random random = new Random();
-            Color randomColor = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
-            g2d.setColor(randomColor);
-            for (FitnessFunction.Coordinates c : arrayElement) {
-
+            path.moveTo(w + r, h);
+            g2d.setColor(Color.red);
+            for (FitnessFunction.Coordinates c : coords) {
                 double x = c.getR() * Math.cos(c.getPhi()) + w;
                 double y = c.getR() * Math.sin(c.getPhi()) + h;
+                path.lineTo(x, y);
+            }
+            g2d.draw(path);
+        }else {
+            for (ArrayList<FitnessFunction.Coordinates> arrayElement : AlgoEvoZuzlowiec.allCoords) {
+                path.reset();
+                path.moveTo(w + r, h);
+                Random random = new Random();
+                Color randomColor = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
+                g2d.setColor(randomColor);
+                for (FitnessFunction.Coordinates c : arrayElement) {
+
+                    double x = c.getR() * Math.cos(c.getPhi()) + w;
+                    double y = c.getR() * Math.sin(c.getPhi()) + h;
                 /*System.out.println( "x= " + x +
                         " y= " + y +
                         " r   = " + c.getR() +
                         " phi = " + c.getPhi()+ "\n");*/
-                path.lineTo(x, y);
+                    path.lineTo(x, y);
+                }
+                g2d.draw(path);
             }
-            g2d.draw(path);
         }
     }
 
