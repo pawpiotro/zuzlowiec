@@ -7,7 +7,8 @@ import ResultService.FitnessFunction;
 public class Main {
     public static void main(String[] args) {
 
-        int size = 800;
+        int size = 600;
+        Zuzlowiec textArea = new Zuzlowiec();
 
         MultiThreadAlgoEvo multiThreadAlgoEvo = new MultiThreadAlgoEvo();
         multiThreadAlgoEvo.repeatAlgo();
@@ -15,7 +16,7 @@ public class Main {
         Draw tmp = new Draw(size);
         tmp.init();
 
-        System.out.println("===============================================================");
+        System.out.println("======================");
         double wynik[] = AlgoEvo.getBestParams();
         for (int i = 0; i < 8; i++)
             System.out.println(wynik[i] + " ");
