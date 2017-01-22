@@ -30,7 +30,7 @@ public class Main
         //EventQueue.invokeLater(new Runnable() {
             //@Override
             //public void run() {
-        Draw tmp = new Draw(function.getCoords(), size);
+        Draw tmp = new Draw();//function.getCoords(), size);
         tmp.init();
     }
 

@@ -4,11 +4,16 @@ import AlgorithmService.AlgoEvo;
 import IndividualService.Individual;
 import ResultService.FitnessFunction;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by Dominik on 2017-01-21.
  */
 public class AlgoEvoZuzlowiec extends AlgoEvo
 {
+    static ArrayList<ArrayList<FitnessFunction.Coordinates>> allCoords = new ArrayList<>();
+    private FitnessFunction current;
     public AlgoEvoZuzlowiec()
     {
         super(8);
@@ -25,13 +30,13 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         double[][] B = {{fparams[2], fparams[3]}, {fparams[4], fparams[5]}};
         double[] c = {fparams[6], fparams[7]};
         Individual x = new Individual(a0, B, c);
-        FitnessFunction function = new FitnessFunction(x, 600);
-        return function.testParameters();
+        current = new FitnessFunction(x, 600);
+        return current.testParameters();
     }
 
     protected void setfxr(double function)
     {
-        // <----- TUTAJ RYSOWANIE CZY COS
+        allCoords.add(current.getCoords());// <----- TUTAJ RYSOWANIE CZY COS
         super.setfxr(function);
     }
 }

@@ -4,18 +4,19 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Draw extends JPanel {
 
-    private final int SIZE;
+    private final int SIZE=600;
     private GeneralPath path = new GeneralPath();
 
     private ArrayList<FitnessFunction.Coordinates> coords;
 
-    public Draw(ArrayList<FitnessFunction.Coordinates> coordinates, int size){
+    /*public Draw(ArrayList<FitnessFunction.Coordinates> coordinates, int size){
         coords = coordinates;
         SIZE = size;
-    }
+    }*/
 
     @Override
     public Dimension getPreferredSize() {
@@ -39,18 +40,25 @@ public class Draw extends JPanel {
         path.reset();
         path.moveTo(w+r, h);
 
-        g2d.setColor(Color.red);
+        for(ArrayList<FitnessFunction.Coordinates> arrayElement: AlgoEvoZuzlowiec.allCoords) {
+            Random random = new Random();
+            Color randomColor = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
+            g2d.setColor(randomColor);
+            //Color randomColor = new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
 
-        for(FitnessFunction.Coordinates c: coords){
-            double x = c.getR() * Math.cos(c.getPhi()) + w;
-            double y = c.getR() * Math.sin(c.getPhi()) + h;
-            /*System.out.println( "x= " + x +
-                    " y= " + y +
-                    " r   = " + c.getR() +
-                    " phi = " + c.getPhi()+ "\n");*/
-            path.lineTo(x,y);
+            System.out.println("zmiana");
+            for (FitnessFunction.Coordinates c : arrayElement) {
+
+                double x = c.getR() * Math.cos(c.getPhi()) + w;
+                double y = c.getR() * Math.sin(c.getPhi()) + h;
+                /*System.out.println( "x= " + x +
+                        " y= " + y +
+                        " r   = " + c.getR() +
+                        " phi = " + c.getPhi()+ "\n");*/
+                path.lineTo(x, y);
+            }
+            g2d.draw(path);
         }
-        g2d.draw(path);
     }
 
         public void init(){
