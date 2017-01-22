@@ -6,19 +6,21 @@ import ResultService.FitnessFunction;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Dominik on 2017-01-21.
  */
 public class AlgoEvoZuzlowiec extends AlgoEvo
 {
-    static ArrayList<ArrayList<FitnessFunction.Coordinates>> allCoords = new ArrayList<>();
+    static List<ArrayList<FitnessFunction.Coordinates>> allCoords = Collections.synchronizedList(new ArrayList<ArrayList<FitnessFunction.Coordinates>>());
     private FitnessFunction current;
     public AlgoEvoZuzlowiec()
     {
         super(8);
     }
- 
+
     static
     {
         best_params = new double[8];
@@ -37,6 +39,7 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
 
     protected synchronized void setfxr(double function)
     {
+
         // <----- TUTAJ RYSOWANIE CZY COS
         super.setfxr(function);
     }

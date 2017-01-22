@@ -77,14 +77,15 @@ public abstract class AlgoEvo implements Runnable
             // porownaj wartosc miedzy watkami
             synchronized(lock)
             {
-                if (fitness(params, size) > fxr)
+                double tmp = fitness(params, size);
+                if (tmp > fxr)
                 {
-                    setfxr(fitness(params, size));
+                    setfxr(tmp);
                     for (int i = 0; i < size; i++)
                         best_params[i] = params[i];
                     System.out.println("fxr: " + fxr + "\n");
                 }
-                System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
+                System.out.println(Thread.currentThread().getId() + " " + tmp + "\n");
             }
             /*try
             {

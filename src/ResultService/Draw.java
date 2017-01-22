@@ -45,9 +45,6 @@ public class Draw extends JPanel {
             Random random = new Random();
             Color randomColor = new Color(random.nextFloat(), random.nextFloat(), random.nextFloat());
             g2d.setColor(randomColor);
-            //Color randomColor = new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255));
-
-            System.out.println(random.nextFloat());
             for (FitnessFunction.Coordinates c : arrayElement) {
 
                 double x = c.getR() * Math.cos(c.getPhi()) + w;
