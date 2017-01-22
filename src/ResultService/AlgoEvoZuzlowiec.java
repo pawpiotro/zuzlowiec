@@ -18,7 +18,7 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
     {
         super(8);
     }
-
+ 
     static
     {
         best_params = new double[8];
