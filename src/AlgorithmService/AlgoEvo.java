@@ -45,7 +45,7 @@ public abstract class AlgoEvo implements Runnable
         }*/
 
         double yparams[] = new double[size];
-        double sigma = 1.0;
+        double sigma = 2.0;
         double phi = 0.0;
         double c1 = 0.82, c2 = 1.2;
         int m = 0;
