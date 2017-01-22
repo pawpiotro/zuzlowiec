@@ -203,7 +203,7 @@ public class FitnessFunction {
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
                                 "phi = " + currentCoords.phi + "\n");*/
-            if (currentCoords.phi > 2*Math.PI || currentCoords.phi < (-2*Math.PI)) break;
+            if (currentCoords.phi > 2*Math.PI || currentCoords.phi < 0) break;
 
 
 
@@ -212,6 +212,8 @@ public class FitnessFunction {
         double distance = currentCoords.phi/(2*Math.PI);
         if(distance > 1.0)
                 distance = 1.0;
+        if(distance < 0.0)
+                distance = 0.0;
         //System.out.println("Distance: "+distance);
         //System.out.println("Time: "+ time);
         return ((distance*distance)/time) * (distance == 1.0 ? 1.0 : 0.7);
