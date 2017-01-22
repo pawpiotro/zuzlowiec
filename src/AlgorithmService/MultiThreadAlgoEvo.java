@@ -22,7 +22,7 @@ public class MultiThreadAlgoEvo  implements AlgorithmInterface
 
     public void startAlgo()
     {
-        AlgoEvo.setFunction(0);
+        //AlgoEvo.setFunction(0);
         for (int i = 0; i < threadsNumber; ++i)
         {
             Thread algoEvoThread = new Thread(new AlgoEvoZuzlowiec());

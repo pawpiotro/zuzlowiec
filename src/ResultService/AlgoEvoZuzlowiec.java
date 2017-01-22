@@ -14,6 +14,11 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         super(8);
     }
 
+    static
+    {
+        best_params = new double[8];
+    }
+
     protected double fitness(double fparams[], int fsize)
     {
         double[] a0 = {fparams[0], fparams[1]};

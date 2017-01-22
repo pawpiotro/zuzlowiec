@@ -9,6 +9,7 @@ public abstract class AlgoEvo implements Runnable
     protected Object lock = new Object();
     protected int size;   // ilosc parametrow
     protected double params[]; // parametry znajdowane przez algorytm
+    static protected double best_params[];
 
     abstract protected double fitness(double fparams[], int fsize);
 
@@ -76,20 +77,24 @@ public abstract class AlgoEvo implements Runnable
             // porownaj wartosc miedzy watkami
             if (fitness(params, size) > fxr) {
                 fxr = fitness(params, size);
+                for (int i = 0; i < size; i++)
+                    best_params[i] = params[i];
                 System.out.println("fxr: " + fxr + "\n");
             }
             System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
         }
     }
 
-    public static double getFunction() {
+    public static double getfxr() {
         return fxr;
     }
 
-    public static void setFunction(double function)
+    public static double[] getBestParams() { return best_params; }
+
+    /*public static void setFunction(double function)
     {
         AlgoEvo.fxr = function;
-    }
+    }*/
 
 }
 
