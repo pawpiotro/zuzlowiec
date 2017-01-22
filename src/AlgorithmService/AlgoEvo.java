@@ -1,49 +1,29 @@
 package AlgorithmService;
 
-import java.lang.*;
-
-public abstract class AlgoEvo implements Runnable
-{
-    // volatile - zeby nie odkladac operacji na niej w pamieci w innej kolejnosci niz wskazana w kodzie zrodlowym
+public abstract class AlgoEvo implements Runnable {
     static double fxr = 0.0; // zmienna wspoldzielona
-    protected Object lock = new Object();
+    protected final Object lock = new Object();
     protected int size;   // ilosc parametrow
     protected double params[]; // parametry znajdowane przez algorytm
     static protected double best_params[];
 
     abstract protected double fitness(double fparams[], int fsize);
 
-    public AlgoEvo(int csize)
-    {
+    public AlgoEvo(int csize) {
         size = csize;
         params = new double[size];
-        for (int i = 0; i < csize; i++){
+        for (int i = 0; i < csize; i++) {
             params[i] = Math.random();
         }
     }
 
-    protected double BoxMullerTransform(){
+    protected double BoxMullerTransform() {
         double x = Math.random();
         double y = Math.random();
-        return x * Math.sqrt(-2.0 * Math.log(x))*Math.cos(2*Math.PI*y);
+        return x * Math.sqrt(-2.0 * Math.log(x)) * Math.cos(2 * Math.PI * y);
     }
 
-    public void run()
-    {
-        /*try
-        {
-            synchronized (lock)
-            {
-                System.out.println("Watek " + Thread.currentThread().getId() + " wypisuje " + function);
-                ++function;
-            }
-            Thread.sleep(10);
-        }
-        catch(InterruptedException e)
-        {
-
-        }*/
-
+    public void run() {
         double yparams[] = new double[size];
         double sigma = 2.0;
         double phi = 0.0;
@@ -51,11 +31,7 @@ public abstract class AlgoEvo implements Runnable
         int m = 0;
         while (sigma > 0.5) {
             // wygeneruj potomka y
-            //double max = Double.MIN_VALUE;
-            //double min = Double.MAX_VALUE;
-            //double temp[] = new double[size];
-            for (int i = 0; i < size; i++)
-            {
+            for (int i = 0; i < size; i++) {
                 double temp = params[i] + sigma * BoxMullerTransform();
                 if (temp > 1.0)
                     temp = 1.0;
@@ -63,36 +39,18 @@ public abstract class AlgoEvo implements Runnable
                     temp = -1.0;
                 yparams[i] = temp;
             }
-            /*for (int i = 0; i < size; i++) {
-                temp[i] = params[i] + sigma * BoxMullerTransform();
-                if(temp[i] > max)
-                    max = temp[i];
-                else if (temp[i] < min)
-                    min = temp[i];
-            }
-
-            for (int i = 0; i < size; i++)
-            {
-                if(temp[i] < 0)
-                    yparams[i] = ;
-            }*/
 
             // przypisz nowe parametry
-            if (fitness(yparams, size) > fitness(params, size))
-            {
-                for (int i = 0; i < size; i++)
-                    params[i] = yparams[i];
+            if (fitness(yparams, size) > fitness(params, size)) {
+                System.arraycopy(yparams, 0, params, 0, size);
                 phi += 0.1;
 
                 // porownaj wartosc miedzy watkami
-                synchronized(lock)
-                {
+                synchronized (lock) {
                     double tmp = fitness(params, size);
-                    if (tmp > fxr)
-                    {
+                    if (tmp > fxr) {
                         setfxr(tmp);
-                        for (int i = 0; i < size; i++)
-                            best_params[i] = params[i];
+                        System.arraycopy(params, 0, best_params, 0, size);
                         System.out.println("fxr: " + fxr + "\n");
                     }
                     System.out.println(Thread.currentThread().getId() + " " + tmp + "\n");
@@ -100,21 +58,12 @@ public abstract class AlgoEvo implements Runnable
             }
             // co 10 krok zmien sigma
             if (m++ == 10) {
-                if (phi < 0.2){
-                    sigma = c1 * sigma;}
-                else if (phi > 0.2)
+                if (phi < 0.2) {
+                    sigma = c1 * sigma;
+                } else if (phi > 0.2)
                     sigma = c2 * sigma;
                 m = 0;
                 phi = 0.0;
-            }
-
-            try
-            {
-                Thread.sleep(10);
-            }
-            catch(InterruptedException ex)
-            {
-
             }
         }
     }
@@ -123,10 +72,11 @@ public abstract class AlgoEvo implements Runnable
         return fxr;
     }
 
-    public static double[] getBestParams() { return best_params; }
+    public static double[] getBestParams() {
+        return best_params;
+    }
 
-    protected void setfxr(double function)
-    {
+    protected void setfxr(double function) {
         fxr = function;
     }
 

@@ -4,48 +4,30 @@ import ResultService.AlgoEvoZuzlowiec;
 
 import java.util.ArrayList;
 
-public class MultiThreadAlgoEvo  implements AlgorithmInterface
-{
+public class MultiThreadAlgoEvo {
     private ArrayList<Thread> algoEvoList = new ArrayList<>();
     private boolean isSuccess = false;
     private static int threadsNumber = 5;
 
-    public MultiThreadAlgoEvo()
-    {
-    }
-
-    public void repeatAlgo()
-    {
-        while(!isSuccess)
+    public void repeatAlgo() {
+        while (!isSuccess)
             startAlgo();
     }
 
-    public void startAlgo()
-    {
-        //AlgoEvo.setFunction(0);
-        for (int i = 0; i < threadsNumber; ++i)
-        {
+    public void startAlgo() {
+        for (int i = 0; i < threadsNumber; ++i) {
             Thread algoEvoThread = new Thread(new AlgoEvoZuzlowiec());
             algoEvoList.add(algoEvoThread);
             algoEvoThread.start();
         }
-        try
-        {
-            for (Thread algoEvoThread: algoEvoList)
+        try {
+            for (Thread algoEvoThread : algoEvoList)
                 algoEvoThread.join();
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(AlgoEvo.getfxr() != 0.0) // na razie zeby program sie konczyl
+        if (AlgoEvo.getfxr() != 0.0) // na razie zeby program sie konczyl
             isSuccess = true;
         algoEvoList.clear();
     }
-
-    /*boolean getIsSuccess()
-    {
-        return isSuccess;
-    }*/
-
 }
