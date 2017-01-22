@@ -48,10 +48,15 @@ public abstract class AlgoEvo implements Runnable
         double phi = 0.0;
         double c1 = 0.82, c2 = 1.2;
         int m = 0;
-        while (sigma > 0.8) {
+        while (sigma > 0.5) {
             // wygeneruj potomka y
             for (int i = 0; i < size; i++) {
-                yparams[i] = params[i] + sigma * BoxMullerTransform();
+                double temp = params[i] + sigma * BoxMullerTransform();
+                if (temp > 1.0)
+                    temp = 1.0;
+                if (temp < -1.0)
+                    temp = -1.0;
+                yparams[i] = temp;
             }
             // przypisz nowe parametry
             if (fitness(yparams, size) > fitness(params, size)) {
@@ -61,11 +66,12 @@ public abstract class AlgoEvo implements Runnable
             }
             // co 10 krok zmien sigma
             if (m++ == 10) {
-                m = 0;
                 if (phi < 0.2){
                     sigma = c1 * sigma;}
                 else if (phi > 0.2)
                     sigma = c2 * sigma;
+                m = 0;
+                phi = 0.0;
             }
             // porownaj wartosc miedzy watkami
             if (fitness(params, size) > fxr) {
