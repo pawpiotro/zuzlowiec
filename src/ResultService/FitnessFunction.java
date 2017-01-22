@@ -198,15 +198,25 @@ public class FitnessFunction {
                 }
             }*/
 
-            saveCoords();
             /*System.out.println( "v[0]= " + v[0] + "\n" +
                                 "v[1]= " + v[1] + "\n" +
                                 "r   = " + currentCoords.r + "\n" +
                                 "phi = " + currentCoords.phi + "\n");*/
-            if (currentCoords.phi > 2*Math.PI || currentCoords.phi < 0) break;
+            if (currentCoords.phi > 2*Math.PI )
+            {
+                currentCoords.phi = 2*Math.PI;
+                saveCoords();
+                break;
+            }
 
+            if (currentCoords.phi < 0 )
+            {
+                currentCoords.phi = 0;
+                saveCoords();
+                break;
+            }
 
-
+            saveCoords();
             time += dt;
         }
         double distance = currentCoords.phi/(2*Math.PI);
