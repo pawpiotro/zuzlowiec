@@ -19,12 +19,12 @@ public class Main
         //for (int i =0; i < 8; i++)
             //System.out.println(wynik[i]);
 
-        double[] a0 = {wynik[0], wynik[1]};
+        /*double[] a0 = {wynik[0], wynik[1]};
         double[][] B = {{wynik[2], wynik[3]}, {wynik[4], wynik[5]}};
         double[] c = {wynik[6], wynik[7]};
         Individual x = new Individual(a0, B, c);
         FitnessFunction function = new FitnessFunction(x, size);
-        System.out.println("Fitness function returned value: "+function.testParameters());
+        System.out.println("Fitness function returned value: "+function.testParameters());*/
         //function.printarray();
 
         //EventQueue.invokeLater(new Runnable() {

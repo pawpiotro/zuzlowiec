@@ -31,12 +31,13 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         double[] c = {fparams[6], fparams[7]};
         Individual x = new Individual(a0, B, c);
         current = new FitnessFunction(x, 600);
+        allCoords.add(current.getCoords());
         return current.testParameters();
     }
 
     protected synchronized void setfxr(double function)
     {
-        allCoords.add(current.getCoords());// <----- TUTAJ RYSOWANIE CZY COS
+        // <----- TUTAJ RYSOWANIE CZY COS
         super.setfxr(function);
     }
 }
