@@ -24,7 +24,7 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         best_params = new double[8];
     }
 
-    protected double fitness(double fparams[], int fsize)
+    protected synchronized double fitness(double fparams[], int fsize)
     {
         double[] a0 = {fparams[0], fparams[1]};
         double[][] B = {{fparams[2], fparams[3]}, {fparams[4], fparams[5]}};
@@ -34,7 +34,7 @@ public class AlgoEvoZuzlowiec extends AlgoEvo
         return current.testParameters();
     }
 
-    protected void setfxr(double function)
+    protected synchronized void setfxr(double function)
     {
         allCoords.add(current.getCoords());// <----- TUTAJ RYSOWANIE CZY COS
         super.setfxr(function);

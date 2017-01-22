@@ -75,13 +75,25 @@ public abstract class AlgoEvo implements Runnable
                 phi = 0.0;
             }
             // porownaj wartosc miedzy watkami
-            if (fitness(params, size) > fxr) {
-                setfxr(fitness(params, size));
-                for (int i = 0; i < size; i++)
-                    best_params[i] = params[i];
-                System.out.println("fxr: " + fxr + "\n");
+            synchronized(lock)
+            {
+                if (fitness(params, size) > fxr)
+                {
+                    setfxr(fitness(params, size));
+                    for (int i = 0; i < size; i++)
+                        best_params[i] = params[i];
+                    System.out.println("fxr: " + fxr + "\n");
+                }
+                System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
             }
-            System.out.println(Thread.currentThread().getId() + " " + fitness(params, size) + "\n");
+            /*try
+            {
+                Thread.sleep(10);
+            }
+            catch(InterruptedException ex)
+            {
+
+            }*/
         }
     }
 
