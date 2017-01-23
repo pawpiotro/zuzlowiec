@@ -26,7 +26,7 @@ public class MultiThreadAlgoEvo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (AlgoEvo.getfxr() != 0.0) // na razie zeby program sie konczyl
+        if (AlgoEvo.getfxr() != 0.0)
             isSuccess = true;
         algoEvoList.clear();
     }

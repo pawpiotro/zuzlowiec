@@ -18,8 +18,8 @@ public class Main {
 
         System.out.println("======================");
         double wynik[] = AlgoEvo.getBestParams();
-        for (int i = 0; i < 8; i++)
-            System.out.println(wynik[i] + " ");
+        //for (int i = 0; i < 8; i++)
+        //   System.out.println(wynik[i] + " ");
 
         double[] a0 = {wynik[0], wynik[1]};
         double[][] B = {{wynik[2], wynik[3]}, {wynik[4], wynik[5]}};
@@ -27,6 +27,7 @@ public class Main {
         Individual x = new Individual(a0, B, c);
         FitnessFunction function = new FitnessFunction(x);
         function.testParameters();
+        function.printInfo();
         //function.printarray();
         Draw best = new Draw(function.getCoords(), size);
         best.init();
